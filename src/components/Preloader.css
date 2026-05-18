@@ -1,0 +1,159 @@
+.preloader-wrapper {
+  position: fixed;
+  inset: 0;
+  background: #f8fafc; /* slate-50 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  overflow: hidden;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.preloader-wrapper.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+  visibility: hidden;
+  transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
+}
+
+/* Soft ambient background glows matching Gurukula theme */
+.ambient-glow {
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.glow-blue {
+  width: 500px;
+  height: 500px;
+  background: #dbeafe; /* blue-100 */
+  top: -100px;
+  left: -100px;
+  animation: floatSoft 12s ease-in-out infinite alternate;
+}
+
+.glow-orange {
+  width: 400px;
+  height: 400px;
+  background: #ffedd5; /* orange-100 */
+  bottom: -50px;
+  right: -50px;
+  animation: floatSoft 15s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatSoft {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.preloader-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Container for Logo */
+.logo-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Energy Beam Underneath Logo - Blue to Orange */
+.energy-beam {
+  position: absolute;
+  bottom: 0px;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #2563eb, #f97316, transparent); /* blue-600 to orange-500 */
+  animation: beamSweep 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes beamSweep {
+  0% { width: 0%; opacity: 0; }
+  50% { width: 120%; opacity: 1; }
+  100% { width: 0%; opacity: 0; }
+}
+
+/* Logo Styling */
+.preloader-logo {
+  width: 280px;
+  height: auto;
+  max-height: 250px;
+  object-fit: contain;
+  /* Entrance and subtle pulse */
+  animation: logoEntrance 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, gentlePulse 3s ease-in-out infinite 0.8s;
+}
+
+@keyframes logoEntrance {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes gentlePulse {
+  0% { transform: scale(1); filter: drop-shadow(0 10px 15px rgba(37, 99, 235, 0.1)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 20px 25px rgba(249, 115, 22, 0.15)); }
+  100% { transform: scale(1); filter: drop-shadow(0 10px 15px rgba(37, 99, 235, 0.1)); }
+}
+
+/* Loading Text & Minimal Line */
+.loading-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.loading-text {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #334155; /* slate-700 */
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  animation: textPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes textPulse {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.loading-line {
+  width: 60px;
+  height: 2px;
+  background: #e2e8f0; /* slate-200 */
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.loading-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #2563eb, #f97316, transparent);
+  animation: lineScan 1.5s linear infinite;
+}
+
+@keyframes lineScan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@media (max-width: 640px) {
+  .preloader-logo {
+    width: 200px;
+  }
+}
